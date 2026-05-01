@@ -1,0 +1,17 @@
+body {
+    background: black;
+    color: white;
+}
+
+.msgs {
+    background-color: grey;
+    margin: 15px;
+    padding: 5px;
+    border-radius: 10px;
+
+}
+
+
+footer {
+    position: fixed;
+}
