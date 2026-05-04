@@ -15,13 +15,15 @@
     <button id="btn">Click Me!</button> -->
         <div id="status">Connecting...</div>
         <textarea id="name" placeholder="Put your Name Here!"></textarea>
-        <button>Submit</button>
+        <button id="name-submit">Submit</button>
     </header>
 
     <br><br>
 
+
     <div id="message-board">
     </div>
+
 
     <div id="send">
         <textarea id="send-box" placeholder="Type your message here!"></textarea>
@@ -34,7 +36,13 @@
         const sendBox = document.getElementById("send-box")
         const sendBtn = document.getElementById("send-btn")
 
+        const nameBox = document.getElementById("name")
+        const nameBtn = document.getElementById("name-submit")
+
         let statusEl = document.getElementById("status")
+
+        let you = ""
+
         let msgs = [
             { usr: "TESTUSER", msg: "Hi everyone! this is a test of the system!" },
             { usr: "_-*anotherTestUser*-_", msg: "it seems to be working!" },
@@ -45,25 +53,32 @@
             messageBoard.innerHTML = "";
             for (let i = 0; i < msgs.length; i++) {
                 messageBoard.innerHTML += `
-                <div class="msgs">
-                    <div class="usr">${msgs[i].usr}</div>
-                    <div class="msg">${msgs[i].msg}</div>
-                    <br><br>
-                </div>
-            `
+                    <div class="msgs">
+                        <div class="usr">${msgs[i].usr}</div>
+                        <div class="msg">${msgs[i].msg}</div>
+                        <br><br>
+                    </div>
+                `
             }
         }
 
         renderMessages()
 
-        sendBtn.onclick = function () {
+        let currName = nameBox.value.trim();
+        nameBtn.onclick = function() {
+            currName = nameBox.value.trim();
+
+        }
+
+        sendBtn.onclick = function() {
             const text = sendBox.value.trim();
             if (text === "") return;
 
-            msgs.push({ usr: "You", msg: text });
+            msgs.push({usr: currName, msg: text });
             renderMessages();
             sendBox.value = "";
         };
+
 
         // const source = new EventSource("/stream")
         // source.onopen = function () {
