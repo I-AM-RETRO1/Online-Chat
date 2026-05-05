@@ -42,6 +42,9 @@ def chat_endpoint():
     data = request.json
     message_json = json.dumps(data)
 
+    with open('chat.json', 'a') as f:
+        f.write(json.dumps(data) + "\n")
+
     with clients_lock:
         for q in clients:
             q.put(message_json)

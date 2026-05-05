@@ -11,4 +11,4 @@
     "usr": "TESTUSER", 
     "msg": "Alright!"
 }
-]
+]{"usr": "hi", "msg": "hi"}
