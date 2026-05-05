@@ -1,8 +1,7 @@
+const messageBoard = document.getElementById("message-board")             // Finds message-board div; where messages will be stored
 
-const messageBoard = document.getElementById("message-board")
-
-const sendBox = document.getElementById("send-box")
-const sendBtn = document.getElementById("send-btn")
+const sendBox = document.getElementById("send-box")                       // Finds the send box
+const sendBtn = document.getElementById("send-btn")                       // 
 
 const nameBox = document.getElementById("name")
 const nameBtn = document.getElementById("name-submit")
@@ -13,7 +12,6 @@ let currName = ""
 
 
 const source = new EventSource("/stream")
-
 
 source.onmessage = function (e) {
     const data = JSON.parse(e.data)
@@ -64,18 +62,3 @@ sendBtn.onclick = function () {
     sendMessage(text)
     sendBox.value = "";
 };
-
-
-// const source = new EventSource("/stream")
-// source.onopen = function () {
-//     statusEl.textContent = "live"
-// }
-
-// source.onmessage = function (e) {
-//     countEl.textContent = e.data
-// }
-
-// let btn = document.getElementById("btn")
-// btn.onclick = function (e) {
-//     fetch("/click", { method: "POST" })
-// }
