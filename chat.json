@@ -1,0 +1,14 @@
+[
+    {
+    "usr": "TESTUSER", 
+    "msg": "Hi everyone! this is a test of the system!"
+},
+{
+    "usr": "_-*anotherTestUser*-_", 
+    "msg": "it seems to be working!"
+},
+{
+    "usr": "TESTUSER", 
+    "msg": "Alright!"
+}
+]
