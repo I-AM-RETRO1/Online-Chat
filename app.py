@@ -1,4 +1,5 @@
 from flask import Flask, render_template, jsonify, Response, request
+from json import JSONDecodeError
 import threading
 import queue
 import json
@@ -11,9 +12,11 @@ count_lock = threading.Lock()
 clients = []
 clients_lock = threading.Lock()
 
+
 @app.route("/")
 def index():
     return render_template("index.html")
+
 
 @app.route("/stream")
 def stream():
@@ -24,7 +27,15 @@ def stream():
 
         def event_stream():
             try:
-                yield "data: {\"status\": \"connected\"}\n\n"
+                with open("chat.json", "r") as f:
+                    history = json.load(f)
+                    for old_msg in history:
+                        yield f"data: {json.dumps(old_msg)}\n\n"
+            except (FileNotFoundError, JSONDecodeError):
+                pass
+
+            try:
+                yield 'data: {"status": "connected"}\n\n'
                 while True:
                     msg = q.get()
                     yield f"data: {msg}\n\n"
@@ -32,24 +43,37 @@ def stream():
                 with clients_lock:
                     if q in clients:
                         clients.remove(q)
-        
-    
+
     return Response(event_stream(), mimetype="text/event-stream")
 
 
-@app.route("/chat", methods = ["POST"])
+@app.route("/chat", methods=["POST"])
 def chat_endpoint():
     data = request.json
     message_json = json.dumps(data)
 
-    with open('chat.json', 'a') as f:
-        f.write(json.dumps(data) + "\n")
+    save_message(data)
 
     with clients_lock:
         for q in clients:
             q.put(message_json)
 
     return jsonify({"status": "sent"})
+
+
+def save_message(new_msg):
+    try:
+        # 1. Read existing messages
+        with open("chat.json", "r") as f:
+            chat_history = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        chat_history = []
+
+    chat_history.append(new_msg)
+
+    with open("chat.json", "w") as f:
+        json.dump(chat_history, f, indent=4)
+
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", threaded=True)
