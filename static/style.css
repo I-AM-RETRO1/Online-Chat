@@ -1,6 +1,24 @@
 body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
     background: black;
     color: white;
+}
+
+#message-board {
+    flex:1;
+    overflow-y: auto;
+    padding: 20px;
+}
+
+#send {
+    position: sticky;
+    bottom: 0;
+    background: darkgrey;
+    padding: 10px;
+    border-top: 1px solid #ccc;
 }
 
 .msgs {
@@ -12,6 +30,11 @@ body {
 }
 
 
-footer {
-    position: fixed;
+header {
+    position: sticky;
+    top: 0;
+    background-color: black;
+    z-index: 1000;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
