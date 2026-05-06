@@ -28,7 +28,11 @@ body {
     margin: 15px;
     padding: 5px;
     border-radius: 10px;
+}
 
+.usr-msgs {
+    background-color: rgb(67, 170, 255) !important;
+    
 }
 
 
