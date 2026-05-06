@@ -1,34 +1,18 @@
 [
     {
-        "usr": "TESTUSER",
-        "msg": "Hi everyone! this is a test of the system!"
+        "usr": "asfasdf",
+        "msg": "adsfasdfasdf"
     },
     {
-        "usr": "_-*anotherTestUser*-_",
-        "msg": "it seems to be working!"
+        "usr": "asfasdf",
+        "msg": "asdfasfdasdf"
     },
     {
-        "usr": "TESTUSER",
-        "msg": "Alright!"
+        "usr": "asfasdf",
+        "msg": "sss"
     },
     {
-        "usr": "asdfasdf",
-        "msg": "asdfsadf"
-    },
-    {
-        "usr": "TESTUSER",
-        "msg": "this is another test"
-    },
-    {
-        "usr": "asdfasdf",
-        "msg": "asdfasdf"
-    },
-    {
-        "usr": "asdfasdf",
-        "msg": "asdfasdf"
-    },
-    {
-        "usr": "sfdasdf",
-        "msg": "asdfsadf"
+        "usr": "test",
+        "msg": "test"
     }
 ]

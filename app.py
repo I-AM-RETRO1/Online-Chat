@@ -6,9 +6,6 @@ import json
 
 app = Flask(__name__)
 
-click_count = 0
-count_lock = threading.Lock()
-
 clients = []
 clients_lock = threading.Lock()
 file_lock = threading.Lock()
@@ -71,7 +68,7 @@ def save_message(new_msg):
         except (FileNotFoundError, json.JSONDecodeError):
             chat_history = []
 
-        chat_history.insert(0, new_msg)
+        chat_history.append(new_msg)
 
         with open("templates/chat.json", "w") as f:
             json.dump(chat_history, f, indent=4)
