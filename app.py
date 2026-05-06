@@ -71,7 +71,7 @@ def save_message(new_msg):
         except (FileNotFoundError, json.JSONDecodeError):
             chat_history = []
 
-        chat_history.append(new_msg)
+        chat_history.insert(0, new_msg)
 
         with open("templates/chat.json", "w") as f:
             json.dump(chat_history, f, indent=4)
