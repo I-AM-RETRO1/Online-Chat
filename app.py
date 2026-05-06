@@ -11,6 +11,7 @@ count_lock = threading.Lock()
 
 clients = []
 clients_lock = threading.Lock()
+file_lock = threading.Lock()
 
 
 @app.route("/")
@@ -25,24 +26,24 @@ def stream():
     with clients_lock:
         clients.append(q)
 
-        def event_stream():
-            try:
-                with open("chat.json", "r") as f:
-                    history = json.load(f)
-                    for old_msg in history:
-                        yield f"data: {json.dumps(old_msg)}\n\n"
-            except (FileNotFoundError, JSONDecodeError):
-                pass
+    def event_stream():
+        try:
+            with open("templates/chat.json", "r") as f:
+                history = json.load(f)
+                for old_msg in history:
+                    yield f"data: {json.dumps(old_msg)}\n\n"
+        except (FileNotFoundError, JSONDecodeError):
+            pass
 
-            try:
-                yield 'data: {"status": "connected"}\n\n'
-                while True:
-                    msg = q.get()
-                    yield f"data: {msg}\n\n"
-            finally:
-                with clients_lock:
-                    if q in clients:
-                        clients.remove(q)
+        try:
+            yield 'data: {"status": "connected"}\n\n'
+            while True:
+                msg = q.get()
+                yield f"data: {msg}\n\n"
+        finally:
+            with clients_lock:
+                if q in clients:
+                    clients.remove(q)
 
     return Response(event_stream(), mimetype="text/event-stream")
 
@@ -62,17 +63,18 @@ def chat_endpoint():
 
 
 def save_message(new_msg):
-    try:
-        # 1. Read existing messages
-        with open("chat.json", "r") as f:
-            chat_history = json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
-        chat_history = []
+    with file_lock:
+        try:
+            # 1. Read existing messages
+            with open("templates/chat.json", "r") as f:
+                chat_history = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            chat_history = []
 
-    chat_history.append(new_msg)
+        chat_history.append(new_msg)
 
-    with open("chat.json", "w") as f:
-        json.dump(chat_history, f, indent=4)
+        with open("templates/chat.json", "w") as f:
+            json.dump(chat_history, f, indent=4)
 
 
 if __name__ == "__main__":
