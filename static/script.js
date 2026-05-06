@@ -35,10 +35,10 @@ async function sendMessage(text) {
 
 function renderMessages() {
     messageBoard.innerHTML = "";
-    for (let i = 0; i < chat.length; i++) {
+    for (let i = chat.length-1; i >= 0; i--) {
         messageBoard.innerHTML += `
             <div class="msgs">
-                <div class="usr">${chat[i].usr}</div>
+                <div class="usr"><strong>${chat[i].usr}</strong></div>
                 <div class="msg">${chat[i].msg}</div>
                 <br><br>
             </div>
@@ -60,5 +60,11 @@ sendBtn.onclick = function () {
 
 
     sendMessage(text)
-    sendBox.value = "";
-};
+    sendBox.value = ""
+}
+
+sendBox.addEventListener("keypress", function(e) {
+    if (e.key === "Enter" && currName !== "") {
+        sendBtn.click()
+    }
+})
