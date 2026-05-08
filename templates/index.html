@@ -19,13 +19,33 @@
     <div id="full-page">
         <aside class="sidebar">
             <nav>
-                <ul>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Settings</a></li>
-                    <li><a href="#">Profile</a></li>
-                </ul>
+                <li><a href="javascript:void">Dashboard</a></li>
+                <li><a href="javascript:void">Settings</a></li>
+
+
+
+
+                <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Profile Options</span>
+
+                <li><select id="theme-selector">
+                        <option value="light">Light Mode</option>
+                        <option value="dark">Dark Mode</option>
+                    </select>
+                </li>
+
             </nav>
         </aside>
+
+        <div id="profileMenu" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+
+            <div class="overlay-content">
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Clients</a>
+                <a href="#">Contact</a>
+            </div>
+        </div>
 
         <div id="message-board">
         </div>
