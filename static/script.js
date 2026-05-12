@@ -64,9 +64,16 @@ sendBtn.onclick = function () {
     sendBox.value = ""
 }
 
-sendBox.addEventListener("keypress", function (e) {
-    if (e.key === "Enter" && currName !== "") {
+sendBox.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && currName !== "" && !e.ctrlKey) {
+        e.preventDefault()
         sendBtn.click()
+    }
+})
+nameBox.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && currName !== "" && !e.ctrlKey) {
+        e.preventDefault()
+        nameBox.click()
     }
 })
 

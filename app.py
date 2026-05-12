@@ -10,6 +10,8 @@ clients = []
 clients_lock = threading.Lock()
 file_lock = threading.Lock()
 
+with open('templates/chat.json', 'w') as f:
+    json.dump([], f)
 
 @app.route("/")
 def index():
