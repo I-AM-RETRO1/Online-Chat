@@ -69,9 +69,11 @@ sendBtn.onclick = function () {
     } else if (text === "") {
         alert("Please write something!");
         return
-    } else if (spamBlock = true)
+    } else if (spamBlock === true) {
+        alert("Our Spam detector has gone off! Please wait a bit before sending another message.")
+    }
 
-        sendMessage(text)
+    sendMessage(text)
     sendBox.value = ""
 }
 
@@ -84,7 +86,7 @@ sendBox.addEventListener("keydown", function (e) {
 nameBox.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && currName !== "" && !e.ctrlKey) {
         e.preventDefault()
-        nameBox.click()
+        nameBtn.click()
     }
 })
 
