@@ -13,6 +13,7 @@ const themeSelector = document.getElementById('theme-selector')
 let statusEl = document.getElementById("status")
 let chat = []
 let currName = ""
+let spamBlock = false
 
 const source = new EventSource("/stream")
 
@@ -31,8 +32,13 @@ source.onmessage = function (e) {
 async function sendMessage(text) {
     await fetch('/chat', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ usr: currName, msg: text }),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            usr: currName,
+            msg: text
+        }),
     })
 }
 
@@ -57,10 +63,15 @@ nameBtn.onclick = function () {
 sendBtn.onclick = function () {
     const text = sendBox.value.trim()
 
-    if (currName === "") { alert("Please set your name first!"); return }
-    else if (text === "") { alert("Please write something!"); return }
+    if (currName === "") {
+        alert("Please set your name first!");
+        return
+    } else if (text === "") {
+        alert("Please write something!");
+        return
+    } else if (spamBlock = true)
 
-    sendMessage(text)
+        sendMessage(text)
     sendBox.value = ""
 }
 
@@ -104,4 +115,3 @@ function closeNav() {
     profileMenu.style.width = "0%"
     mask.style.display = "none"
 }
-
