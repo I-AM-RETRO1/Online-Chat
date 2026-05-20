@@ -1,1 +1,14 @@
-[]
+[
+    {
+        "usr": "testname",
+        "msg": "testmessage"
+    },
+    {
+        "usr": "name",
+        "msg": "test"
+    },
+    {
+        "usr": "<!DOCTYPE html>\n<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <title>Chat</title>\n    <link rel=\"stylesheet\" href=\"/static/style.css\">\n    </link>\n</head>\n\n<body>\n    <div id=\"mask\" class=\"mask-hidden\" onclick=\"closeNav()\"></div>\n\n    <header>\n        <h1>Chat</h1>\n        <div id=\"status\">Connecting...</div>\n        <textarea id=\"name\" placeholder=\"Put your Name Here!\"></textarea>\n        <button id=\"name-submit\">Submit</button>\n    </header>\n\n    <div id=\"main\">\n        <aside class=\"sidebar\">\n            <nav>\n                <li><a href=\"javascript:void\">Dashboard</a></li>\n                <li><a href=\"javascript:void\">Settings</a></li>\n\n\n\n\n                <span style=\"font-size:30px;cursor:pointer\" onclick=\"openNav()\">&#9776; Profile Options</span>\n\n                <li><select id=\"theme-selector\">\n                        <option value=\"light\">Light Mode</option>\n                        <option value=\"dark\">Dark Mode</option>\n                    </select>\n                </li>\n\n            </nav>\n        </aside>\n\n        <div id=\"profileMenu\" class=\"overlay\">\n            <a href=\"javascript:void(0)\" class=\"closebtn\" onclick=\"closeNav()\">&times;</a>\n\n            <div class=\"overlay-content\">\n                <a href=\"#\">About</a>\n                <a href=\"#\">Services</a>\n                <a href=\"#\">Clients</a>\n                <a href=\"#\">Contact</a>\n            </div>\n        </div>\n\n        <div id=\"message-board\">\n        </div>\n\n\n        <div id=\"send\">\n            <textarea id=\"send-box\" placeholder=\"Type your message here!\"></textarea>\n            <button id=\"send-btn\">Send!</button>\n        </div>\n    </div>\n    <script src=\"/static/script.js\"></script>\n</body>\n\n</html>",
+        "msg": "test"
+    }
+]

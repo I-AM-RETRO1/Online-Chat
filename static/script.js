@@ -14,6 +14,7 @@ let statusEl = document.getElementById("status")
 let chat = []
 let currName = ""
 let spamBlock = false
+let spamCount = 0
 
 const source = new EventSource("/stream")
 
@@ -47,8 +48,8 @@ function renderMessages() {
     for (let i = chat.length - 1; i >= 0; i--) {
         messageBoard.innerHTML += `
             <div class="msgs">
-                <div class="usr"><strong style="font-size: 20px !important;">${chat[i].usr}</strong></div>
-                <div class="msg">${chat[i].msg}</div>
+                <div class="usr"><strong style="font-size: 20px !important;">${escapeHtml(chat[i].usr)}</strong></div>
+                <div class="msg">${escapeHtml(chat[i].msg)}</div>
                 <br><br>
             </div>
         `
@@ -77,12 +78,20 @@ sendBtn.onclick = function () {
     sendBox.value = ""
 }
 
+const spamReset = setInterval(() => {
+    if (spamCount > 0) {
+        spamCount--
+        console.log("function run")
+    }
+}, 1000)
+
 sendBox.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && currName !== "" && !e.ctrlKey) {
         e.preventDefault()
         sendBtn.click()
     }
 })
+
 nameBox.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && currName !== "" && !e.ctrlKey) {
         e.preventDefault()

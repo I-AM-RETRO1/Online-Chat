@@ -29,6 +29,20 @@ body {
     font-family: monospace;
 }
 
+
+textarea {
+    height: 90%;
+    width: auto;
+    background: var(--tertiary-bg-color);
+    color: var(--main-text-color);
+}
+
+button {
+    border-radius: 15px;
+    background-color: var(--tertiary-bg-color);
+    color: var(--main-text-color);
+}
+
 #message-board {
     flex: 1;
     overflow-y: auto;
